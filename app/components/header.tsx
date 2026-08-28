@@ -1,11 +1,17 @@
 "use client";
 
-import Navigation from "./nav";
 import { useEffect, useState } from "react";
+import Navigation from "./nav";
+import ThemeToggle from "./theme-toggle";
 
 export default function Head() {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] =
+        useState(false);
+
+    const [
+        isMobileMenuOpen,
+        setIsMobileMenuOpen,
+    ] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -14,24 +20,35 @@ export default function Head() {
 
         handleScroll();
 
-        window.addEventListener("scroll", handleScroll, {
-            passive: true,
-        });
+        window.addEventListener(
+            "scroll",
+            handleScroll,
+            {
+                passive: true,
+            },
+        );
 
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener(
+                "scroll",
+                handleScroll,
+            );
         };
     }, []);
 
     return (
         <header
-            className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-                isScrolled
+            className={`
+                sticky top-0 z-50 w-full
+                transition-all duration-300
+                ${isScrolled
                     ? "border-b border-white/10 bg-[#050506]/95 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-md"
                     : "border-b border-transparent bg-[#050506]"
-            }`}
+                }
+            `}
         >
             <div className="mx-4 flex items-center justify-between py-4 transition-all duration-300 sm:mx-6">
+                {/* Profile Information */}
                 <div className="flex items-center gap-3">
                     <div className="h-9 w-9 shrink-0">
                         <img
@@ -50,6 +67,7 @@ export default function Head() {
                             <span className="mr-1 text-[#C8FF3E]">
                                 &#9679;
                             </span>
+
                             Available to work
                         </p>
                     </div>
@@ -60,33 +78,59 @@ export default function Head() {
                     <Navigation />
                 </div>
 
-                {/* Desktop CV Button */}
-                <div className="hidden items-center md:flex">
+                {/* Desktop Actions */}
+                <div className="hidden items-center gap-3 md:flex">
+                    {/* Dark / Light Theme Circle */}
+                    <ThemeToggle />
+
+                    {/* Download CV */}
                     <a
                         href="/Muneeb-Zafar-Resume.pdf"
                         download="Muneeb-Zafar-resume.pdf"
-                        className="flex cursor-pointer items-center gap-2 rounded bg-[#C8FF3E] px-3 py-2 text-sm font-medium text-[#050506] shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+                        className="
+                            flex cursor-pointer items-center
+                            gap-2 rounded bg-[#C8FF3E]
+                            px-3 py-2 text-sm font-medium
+                            text-[#050506] shadow-md
+                            transition-all duration-200
+                            hover:-translate-y-1
+                            hover:shadow-lg
+                        "
                     >
                         <DownloadIcon />
                         Download CV
                     </a>
                 </div>
 
-                {/* Mobile Menu Button */}
-                <div className="flex items-center md:hidden">
+                {/* Mobile Actions */}
+                <div className="flex items-center gap-2 md:hidden">
+                    {/* Mobile Theme Circle */}
+                    <ThemeToggle />
+
+                    {/* Hamburger Button */}
                     <button
                         type="button"
                         onClick={() =>
-                            setIsMobileMenuOpen((isOpen) => !isOpen)
+                            setIsMobileMenuOpen(
+                                (isOpen) => !isOpen,
+                            )
                         }
                         className="p-2 text-white focus:outline-none"
                         aria-label={
-                            isMobileMenuOpen ? "Close menu" : "Open menu"
+                            isMobileMenuOpen
+                                ? "Close menu"
+                                : "Open menu"
                         }
-                        aria-expanded={isMobileMenuOpen}
+                        aria-expanded={
+                            isMobileMenuOpen
+                        }
                         aria-controls="mobile-navigation"
                     >
-                        {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+                        {isMobileMenuOpen ? (
+                            <CloseIcon />
+                        ) : (
+                            <MenuIcon />
+                        )}
                     </button>
                 </div>
             </div>
@@ -95,19 +139,38 @@ export default function Head() {
             {isMobileMenuOpen && (
                 <div
                     id="mobile-navigation"
-                    className="border-t border-white/10 bg-[#050506] px-5 py-3 md:hidden"
+                    className="
+                        border-t border-white/10
+                        bg-[#050506] px-5 py-3
+                        md:hidden
+                    "
                 >
                     <div className="flex flex-col gap-2 [&>nav]:flex-col [&>nav]:items-start [&>nav]:gap-2 [&>nav_*]:py-1">
                         <Navigation
-                            onNavigate={() => setIsMobileMenuOpen(false)}
+                            onNavigate={() =>
+                                setIsMobileMenuOpen(
+                                    false,
+                                )
+                            }
                         />
 
                         <div className="pt-2">
                             <a
                                 href="/Muneeb-Zafar-Resume.pdf"
                                 download="Muneeb-Zafar-resume.pdf"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="flex w-full cursor-pointer items-center justify-center gap-2 rounded bg-[#C8FF3E] py-2 text-sm font-medium text-[#050506] shadow-md transition-all duration-200"
+                                onClick={() =>
+                                    setIsMobileMenuOpen(
+                                        false,
+                                    )
+                                }
+                                className="
+                                    flex w-full cursor-pointer
+                                    items-center justify-center
+                                    gap-2 rounded bg-[#C8FF3E]
+                                    py-2 text-sm font-medium
+                                    text-[#050506] shadow-md
+                                    transition-all duration-200
+                                "
                             >
                                 <DownloadIcon />
                                 Download CV
@@ -135,8 +198,15 @@ function DownloadIcon() {
             aria-hidden="true"
         >
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+
             <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
+
+            <line
+                x1="12"
+                y1="15"
+                x2="12"
+                y2="3"
+            />
         </svg>
     );
 }

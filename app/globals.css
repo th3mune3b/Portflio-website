@@ -1,27 +1,462 @@
 @import "tailwindcss";
 
+/* =========================================
+   BASE THEME SETTINGS
+========================================= */
+
+:root {
+    --light-page: #f3f5ed;
+    --light-surface: #ffffff;
+    --light-surface-soft: #e9ede0;
+    --light-surface-muted: #f7f8f3;
+
+    --light-text: #12150e;
+    --light-text-muted: #565d4d;
+    --light-text-soft: #737a6a;
+
+    /* Main website theme color */
+    --light-accent: #a2d526;
+    --light-accent-hover: #8fbd1d;
+    --light-accent-button: #a2d526;
+    --light-accent-soft: #edf7cf;
+
+    --light-border: #cbd3bd;
+    --light-border-strong: #b4c68a;
+    --light-border-accent: #a2d526;
+
+    --light-shadow:
+        0 12px 35px rgb(38 48 20 / 8%);
+
+    --light-shadow-hover:
+        0 18px 45px rgb(162 213 38 / 18%);
+}
+
 html {
     scroll-behavior: smooth;
+    background-color: #050506;
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+html[data-theme="light"] {
+    color-scheme: light;
+    background-color: var(--light-page);
 }
 
 body {
-    background: #050506;
+    background-color: #050506;
+    color: #ffffff;
+
+    transition:
+        background-color 300ms ease,
+        color 300ms ease;
 }
+
+/* =========================================
+   LIGHT THEME — BODY
+========================================= */
+
+html[data-theme="light"] body {
+    background-color: var(--light-page);
+    color: var(--light-text);
+}
+
+/* =========================================
+   LIGHT THEME — PAGE BACKGROUNDS
+========================================= */
+
+html[data-theme="light"] [class~="bg-[#050506]"],
+html[data-theme="light"] [class~="bg-black"] {
+    background-color:
+        var(--light-page) !important;
+}
+
+html[data-theme="light"] [class~="bg-[#050506]/95"] {
+    background-color:
+        rgb(243 245 237 / 95%) !important;
+}
+
+/* =========================================
+   LIGHT THEME — HEADER AND NAVBAR
+========================================= */
+
+html[data-theme="light"] header {
+    color: var(--light-text);
+}
+
+html[data-theme="light"] [class~="bg-[#161C1F]"] {
+    background-color:
+        var(--light-surface-soft) !important;
+
+    border: 1px solid var(--light-border) !important;
+
+    box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 70%);
+}
+
+html[data-theme="light"] [class~="after:bg-[#C8FF3E]"]::after {
+    background-color:
+        var(--light-accent) !important;
+}
+
+/* =========================================
+   LIGHT THEME — CARDS
+========================================= */
+
+html[data-theme="light"] [class~="bg-[#0C1015]"] {
+    background-color:
+        var(--light-surface) !important;
+}
+
+html[data-theme="light"] [class~="bg-[#080B0F]"] {
+    background-color:
+        var(--light-surface-muted) !important;
+}
+
+html[data-theme="light"] [class~="bg-[#0a0a0c]/80"],
+html[data-theme="light"] [class~="bg-[#0d0d0f]/90"] {
+    background-color:
+        rgb(255 255 255 / 92%) !important;
+}
+
+html[data-theme="light"] [class~="bg-black/20"],
+html[data-theme="light"] [class~="bg-black/25"] {
+    background-color:
+        var(--light-surface-muted) !important;
+}
+
+html[data-theme="light"] [class~="bg-white/[0.035]"],
+html[data-theme="light"] [class~="bg-white/5"] {
+    background-color:
+        rgb(18 21 14 / 4%) !important;
+}
+
+/* Main cards shadow */
+
+html[data-theme="light"] [class~="rounded-2xl"][class~="border"] {
+    box-shadow:
+        var(--light-shadow);
+}
+
+/* Cards hover */
+
+html[data-theme="light"] [class~="rounded-2xl"][class~="border"]:hover {
+    box-shadow:
+        var(--light-shadow-hover);
+}
+
+/* Social cards */
+
+html[data-theme="light"] a[class~="rounded-xl"][class~="border"] {
+    background-color:
+        var(--light-surface) !important;
+
+    box-shadow:
+        0 8px 25px rgb(38 48 20 / 7%);
+}
+
+/* =========================================
+   LIGHT THEME — CARD HOVER BACKGROUNDS
+========================================= */
+
+html[data-theme="light"] [class~="hover:bg-white/[0.03]"]:hover,
+html[data-theme="light"] [class~="hover:bg-white/[0.035]"]:hover,
+html[data-theme="light"] [class~="hover:bg-white/[0.06]"]:hover,
+html[data-theme="light"] [class~="hover:bg-white/5"]:hover {
+    background-color:
+        var(--light-accent-soft) !important;
+}
+
+/* =========================================
+   LIGHT THEME — MAIN TEXT
+========================================= */
+
+html[data-theme="light"] [class~="text-white"] {
+    color:
+        var(--light-text) !important;
+}
+
+html[data-theme="light"] [class~="text-[#A1A1AA]"] {
+    color:
+        var(--light-text-muted) !important;
+}
+
+html[data-theme="light"] [class~="text-[#868B94]"] {
+    color:
+        var(--light-text-soft) !important;
+}
+
+/* =========================================
+   LIGHT THEME — SOFT TEXT
+========================================= */
+
+html[data-theme="light"] [class~="text-white/25"],
+html[data-theme="light"] [class~="text-white/30"],
+html[data-theme="light"] [class~="text-white/35"] {
+    color:
+        rgb(18 21 14 / 50%) !important;
+}
+
+html[data-theme="light"] [class~="text-white/40"],
+html[data-theme="light"] [class~="text-white/45"] {
+    color:
+        rgb(18 21 14 / 62%) !important;
+}
+
+/* =========================================
+   LIGHT THEME — ACCENT TEXT
+========================================= */
+
+html[data-theme="light"] [class~="text-[#C8FF3E]"] {
+    color:
+        var(--light-accent) !important;
+}
+
+html[data-theme="light"] [class~="hover:text-[#C8FF3E]"]:hover {
+    color:
+        var(--light-accent-hover) !important;
+}
+
+html[data-theme="light"] .group:hover [class~="group-hover:text-[#C8FF3E]"] {
+    color:
+        var(--light-accent-hover) !important;
+}
+
+html[data-theme="light"] [class~="hover:text-white"]:hover {
+    color:
+        var(--light-text) !important;
+}
+
+html[data-theme="light"] .group:hover [class~="group-hover:text-white"] {
+    color:
+        var(--light-text) !important;
+}
+
+/* =========================================
+   LIGHT THEME — LIME BUTTONS
+========================================= */
+
+html[data-theme="light"] [class~="bg-[#C8FF3E]"] {
+    background-color:
+        var(--light-accent-button) !important;
+
+    color:
+        #101408 !important;
+}
+
+html[data-theme="light"] [class~="hover:bg-[#b0eb2f]"]:hover,
+html[data-theme="light"] [class~="hover:bg-[#D5FF6B]"]:hover {
+    background-color:
+        #8fbd1d !important;
+}
+
+/* =========================================
+   LIGHT THEME — SOFT ACCENT BACKGROUNDS
+========================================= */
+
+html[data-theme="light"] [class~="bg-[#C8FF3E]/10"],
+html[data-theme="light"] [class~="bg-[#C8FF3E]/[0.055]"],
+html[data-theme="light"] [class~="bg-[#C8FF3E]/[0.06]"],
+html[data-theme="light"] [class~="bg-[#C8FF3E]/[0.07]"] {
+    background-color:
+        var(--light-accent-soft) !important;
+}
+
+/* =========================================
+   LIGHT THEME — NORMAL BORDERS
+========================================= */
+
+html[data-theme="light"] [class~="border-white/10"] {
+    border-color:
+        var(--light-border) !important;
+}
+
+html[data-theme="light"] [class~="border-white/15"],
+html[data-theme="light"] [class~="border-white/20"] {
+    border-color:
+        var(--light-border-strong) !important;
+}
+
+html[data-theme="light"] [class~="border-white"] {
+    border-color:
+        var(--light-text) !important;
+}
+
+/* =========================================
+   LIGHT THEME — PERMANENT ACCENT BORDERS
+========================================= */
+
+html[data-theme="light"] [class~="border-[#C8FF3E]"] {
+    border-color:
+        var(--light-border-accent) !important;
+}
+
+html[data-theme="light"] [class~="border-[#C8FF3E]/20"],
+html[data-theme="light"] [class~="border-[#C8FF3E]/50"],
+html[data-theme="light"] [class~="border-[#C8FF3E]/55"],
+html[data-theme="light"] [class~="border-[#C8FF3E]/60"],
+html[data-theme="light"] [class~="border-[#C8FF3E]/70"] {
+    border-color:
+        var(--light-border-strong) !important;
+}
+
+/* Stronger border on hover */
+
+html[data-theme="light"] [class~="hover:border-[#C8FF3E]"]:hover,
+html[data-theme="light"] [class~="hover:border-[#C8FF3E]/50"]:hover,
+html[data-theme="light"] [class~="hover:border-[#C8FF3E]/55"]:hover,
+html[data-theme="light"] [class~="hover:border-[#C8FF3E]/60"]:hover {
+    border-color:
+        var(--light-accent) !important;
+}
+
+html[data-theme="light"] .group:hover [class~="group-hover:border-[#C8FF3E]"] {
+    border-color:
+        var(--light-accent) !important;
+}
+
+/* =========================================
+   LIGHT THEME — FORM FIELDS
+========================================= */
+
+html[data-theme="light"] input,
+html[data-theme="light"] textarea {
+    background-color:
+        var(--light-surface-muted) !important;
+
+    color:
+        var(--light-text) !important;
+
+    border-color:
+        var(--light-border) !important;
+}
+
+html[data-theme="light"] input:focus,
+html[data-theme="light"] textarea:focus {
+    background-color:
+        var(--light-surface) !important;
+
+    border-color:
+        var(--light-accent) !important;
+
+    box-shadow:
+        0 0 0 3px rgb(101 132 0 / 12%) !important;
+}
+
+html[data-theme="light"] input::placeholder,
+html[data-theme="light"] textarea::placeholder {
+    color:
+        rgb(18 21 14 / 42%) !important;
+}
+
+/* =========================================
+   LIGHT THEME — HERO SECTION
+========================================= */
+
+/* Hero grid */
+
+html[data-theme="light"] #home>div:first-child {
+    background-image:
+        linear-gradient(rgb(18 21 14 / 11%) 1px,
+            transparent 1px),
+        linear-gradient(90deg,
+            rgb(18 21 14 / 11%) 1px,
+            transparent 1px) !important;
+
+    background-size:
+        60px 60px !important;
+}
+
+/* Hero watermark */
+
+html[data-theme="light"] #home h1 {
+    -webkit-text-stroke:
+        1.5px rgb(18 21 14 / 15%) !important;
+}
+
+/* Hero image container */
+
+html[data-theme="light"] #home [class~="bg-[#0a0a0c]/80"] {
+    border-color:
+        var(--light-border-strong) !important;
+
+    box-shadow:
+        0 20px 50px rgb(38 48 20 / 15%) !important;
+}
+
+/* =========================================
+   LIGHT THEME — FOOTER
+========================================= */
+
+html[data-theme="light"] footer {
+    border-top-color:
+        var(--light-border) !important;
+}
+
+/* =========================================
+   COLOR TRANSITIONS
+========================================= */
+
+header,
+section,
+footer,
+article,
+form,
+input,
+textarea {
+    transition:
+        background-color 300ms ease,
+        color 300ms ease,
+        border-color 300ms ease,
+        box-shadow 300ms ease;
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
     }
+
+    header,
+    section,
+    footer,
+    article,
+    form,
+    input,
+    textarea {
+        transition: none;
+    }
 }
+
+/* =========================================
+   YOUR EXISTING HERO STYLES
+========================================= */
 
 .hero__grid {
     position: absolute;
     z-index: -2;
     inset: 0;
-    opacity: .38;
-    background-image: linear-gradient(#f4f1e81f 1px, transparent 1px), linear-gradient(90deg, #f4f1e81f 1px, transparent 1px);
-    background-size: 68px 68px;
-    mask-image: linear-gradient(to bottom, black, transparent 78%);
+    opacity: 0.38;
+
+    background-image:
+        linear-gradient(#f4f1e81f 1px,
+            transparent 1px),
+        linear-gradient(90deg,
+            #f4f1e81f 1px,
+            transparent 1px);
+
+    background-size:
+        68px 68px;
+
+    mask-image:
+        linear-gradient(to bottom,
+            black,
+            transparent 78%);
 }
 
 .hero {
@@ -29,7 +464,10 @@ body {
     display: flex;
     align-items: center;
     min-height: 100svh;
-    padding: 135px max(6.2vw, 28px) 74px;
+
+    padding:
+        135px max(6.2vw, 28px) 74px;
+
     isolation: isolate;
     overflow: hidden;
 }
