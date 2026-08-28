@@ -64,9 +64,9 @@ export default function HeroSection() {
 
                         {/* Main Headline */}
                         <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
-                            I build intelligent web experiences where modern{" "}
-                            <span className="text-[#C8FF3E]">development</span> <br className="hidden sm:inline" />
-                            meets AI.
+                            Muhammad{" "}
+                            <span className="text-[#C8FF3E]">Muneeb</span> <br className="hidden sm:inline" />
+                            Zafar
                         </h2>
                         <p className="mt-6 max-w-xl text-base leading-7 text-[#A1A1AA] sm:text-lg sm:leading-8">
                             Crafting fast, scalable web apps with{" "}
@@ -82,7 +82,7 @@ export default function HeroSection() {
                                 View My Work
                             </a>
                             <a
-                                href="#contact"
+                                href="https://www.linkedin.com/in/muhammad-muneeb-zafar-79b6223b4"
                                 className="rounded border border-white/20 bg-transparent px-6 py-3 text-sm font-semibold text-white transition-all hover:border-white hover:bg-white/5"
                             >
                                 Let's Connect
