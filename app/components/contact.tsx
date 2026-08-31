@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import { motion, type Variants } from "framer-motion"
 import {
     ArrowUpRight,
@@ -77,21 +77,48 @@ const itemVariants: Variants = {
 }
 
 export default function Contact() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
+    const [feedback, setFeedback] = useState("")
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        const formData = new FormData(event.currentTarget)
+        const form = event.currentTarget
+        const formData = new FormData(form)
         const name = String(formData.get("name") || "")
         const email = String(formData.get("email") || "")
         const subject = String(formData.get("subject") || "Portfolio enquiry")
         const message = String(formData.get("message") || "")
 
-        const emailSubject = encodeURIComponent(subject)
-        const emailBody = encodeURIComponent(
-            `Name: ${name}\nReply email: ${email}\n\n${message}`,
-        )
+        setStatus("sending")
+        setFeedback("")
 
-        window.location.href = `mailto:${contactEmail}?subject=${emailSubject}&body=${emailBody}`
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, subject, message }),
+            })
+            const result = (await response.json()) as {
+                message?: string
+                error?: string
+            }
+
+            if (!response.ok) {
+                throw new Error(result.error || "Unable to send your message.")
+            }
+
+            setStatus("success")
+            setFeedback(result.message || "Message sent successfully.")
+            form.reset()
+        } catch (error) {
+            setStatus("error")
+            setFeedback(
+                error instanceof Error
+                    ? error.message
+                    : "Unable to send your message. Please try again.",
+            )
+        }
     }
 
     return (
@@ -356,15 +383,24 @@ export default function Contact() {
                             variants={itemVariants}
                             className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
                         >
-                            <p className="max-w-xs text-xs leading-5 text-white/35">
-                                Submitting opens your email app with the message ready.
+                            <p
+                                aria-live="polite"
+                                className={`max-w-xs text-xs leading-5 ${status === "success"
+                                    ? "text-[#C8FF3E]"
+                                    : status === "error"
+                                        ? "text-red-400"
+                                        : "text-white/35"
+                                    }`}
+                            >
+                                {feedback || "Your message will be sent directly to my inbox."}
                             </p>
 
                             <button
                                 type="submit"
-                                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#C8FF3E] px-6 text-sm font-semibold text-[#050506] transition-all duration-300 hover:-translate-y-1 hover:bg-[#D5FF6B] hover:shadow-[0_12px_35px_rgba(200,255,62,0.18)]"
+                                disabled={status === "sending"}
+                                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#C8FF3E] px-6 text-sm font-semibold text-[#050506] transition-all duration-300 hover:-translate-y-1 hover:bg-[#D5FF6B] hover:shadow-[0_12px_35px_rgba(200,255,62,0.18)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                             >
-                                Send message
+                                {status === "sending" ? "Sending..." : "Send message"}
                                 <Send size={16} />
                             </button>
                         </motion.div>
