@@ -176,14 +176,14 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col  gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
                     <p className="text-xs text-white/35">
                         © {currentYear} Muhammad Muneeb Zafar. All rights reserved.
                     </p>
 
-                    <div className="flex items-center justify-between gap-6 sm:justify-end">
+                    {/* <div className="flex items-center justify-between gap-6 sm:justify-end">
                         <p className="text-xs text-white/35">
-                            Built with Next.js & Tailwind CSS
+                            Built with ❤️
                         </p>
 
                         <a
@@ -193,7 +193,7 @@ export default function Footer() {
                         >
                             <ArrowUp size={16} />
                         </a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </footer>
